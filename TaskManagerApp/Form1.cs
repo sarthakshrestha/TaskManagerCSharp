@@ -58,8 +58,15 @@ namespace TaskManagerApp
                 // Creating a new checkbox for the task
                 CheckBox checkBox = CreateCheckBox(taskRequired);
 
+                // Creating a new delete button for the task
+                Button deleteButton = CreateDeleteButton(taskRequired);
+
+
                 // Adding the checkbox to the panel
                 taskPanel.Controls.Add(checkBox);
+                taskPanel.Controls.Add(deleteButton);
+
+                ArrangeControlsInPanel();
 
                 // Clear the text box for the next task
                 textBox1.Clear();
@@ -67,8 +74,6 @@ namespace TaskManagerApp
                 // Adding the task according to the priority
                 tasks.Add(new TaskItem { Task = taskRequired, Priority = priority });
 
-                // Displaying the priority as a popup
-                ShowPriorityPopup(taskRequired, priority);
 
                 // Show tasks in the task panel based on priority
                 ShowTaskPriority();
@@ -79,6 +84,64 @@ namespace TaskManagerApp
             }
         }
 
+        private void ArrangeControlsInPanel()
+        {
+            int yLocation = 0;
+
+            // Iterate through the controls and arrange them
+            for (int i = 0; i < taskPanel.Controls.Count; i++)
+            {
+                Control control = taskPanel.Controls[i];
+                control.Location = new Point(0, yLocation);
+
+                // If it's a CheckBox, move the delete button next to it
+                if (control is CheckBox)
+                {
+                    Control deleteButton = taskPanel.Controls.Cast<Control>().FirstOrDefault(c => c.Tag?.ToString() == control.Text);
+                    if (deleteButton != null)
+                    {
+                        deleteButton.Location = new Point(control.Width + 5, yLocation);
+                    }
+                }
+
+                yLocation += control.Height + 10; // Adjust the vertical spacing
+            }
+        }
+
+
+        private Button CreateDeleteButton(string taskRequired)
+        {
+            // Create a new Button for deleting the task
+            Button deleteButton = new Button
+            {
+                Text = "Delete",
+                Tag = taskRequired, // Using Tag to associate the button with the task
+                AutoSize = true,
+            };
+
+            // Set the click event handler for the delete button
+            deleteButton.Click += DeleteButton_Click;
+
+            return deleteButton;
+        }
+
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            // Handle the delete button click event
+            Button deleteButton = (Button)sender;
+            string taskToDelete = deleteButton.Tag.ToString();
+
+            // Find and remove the task from the list
+            TaskItem taskItem = tasks.Find(t => t.Task == taskToDelete);
+            if (taskItem != null)
+            {
+                tasks.Remove(taskItem);
+
+                // Show tasks in the task panel based on priority
+                ShowTaskPriority();
+            }
+        }
 
         private string GetSelectedPriority()
         {
@@ -115,11 +178,20 @@ namespace TaskManagerApp
             foreach (var taskItem in sortedTasks)
             {
                 CheckBox checkBox = CreateCheckBox(taskItem.Task);
+                Button deleteButton = CreateDeleteButton(taskItem.Task);
+
+                // Set the location for both the checkbox and delete button
                 checkBox.Location = new Point(0, yLocation);
+                deleteButton.Location = new Point(checkBox.Width + 5, yLocation);
+
                 yLocation += checkBox.Height + 10; // Adjust the vertical spacing
+
+                // Add both checkbox and delete button to the task panel
                 taskPanel.Controls.Add(checkBox);
+                taskPanel.Controls.Add(deleteButton);
             }
         }
+
 
         private CheckBox CreateCheckBox(string taskRequired)
         {
@@ -137,10 +209,6 @@ namespace TaskManagerApp
             return checkBox;
         }
 
-        private void ShowPriorityPopup(string taskRequired, string priority)
-        {
-            // Display the priority as a popup
-            MessageBox.Show($"Task: {taskRequired}\nPriority: {priority}");
-        }
+       
     }
 }
