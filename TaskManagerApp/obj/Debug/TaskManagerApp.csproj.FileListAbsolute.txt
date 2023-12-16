@@ -1,0 +1,10 @@
+C:\Users\ASUS\source\repos\TaskManagerApp\TaskManagerApp\obj\Debug\TaskManagerApp.csproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\TaskManagerApp\TaskManagerApp\obj\Debug\TaskManagerApp.MainWindow.resources
+C:\Users\ASUS\source\repos\TaskManagerApp\TaskManagerApp\obj\Debug\TaskManagerApp.Properties.Resources.resources
+C:\Users\ASUS\source\repos\TaskManagerApp\TaskManagerApp\obj\Debug\TaskManagerApp.csproj.GenerateResource.cache
+C:\Users\ASUS\source\repos\TaskManagerApp\TaskManagerApp\obj\Debug\TaskManagerApp.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\TaskManagerApp\TaskManagerApp\bin\Debug\TaskManagerApp.exe.config
+C:\Users\ASUS\source\repos\TaskManagerApp\TaskManagerApp\bin\Debug\TaskManagerApp.exe
+C:\Users\ASUS\source\repos\TaskManagerApp\TaskManagerApp\bin\Debug\TaskManagerApp.pdb
+C:\Users\ASUS\source\repos\TaskManagerApp\TaskManagerApp\obj\Debug\TaskManagerApp.exe
+C:\Users\ASUS\source\repos\TaskManagerApp\TaskManagerApp\obj\Debug\TaskManagerApp.pdb
