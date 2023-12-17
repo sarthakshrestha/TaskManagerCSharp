@@ -4,7 +4,7 @@ Add your required tasks based on priority set to high, medium, or low through th
 
 <h1> Guide to run the app </h1>
 
-Simply clone and go to the Debug folder and double click TaskManagerApp.exe, the directory usually looks something like 'C:\ClonedDirectory\TaskManagerApp\TaskManagerApp\bin\Debug' and there you will see <b>TaskManagerApp.exe</b>
+Simply clone and go within the big and then the Debug folder and double click TaskManagerApp.exe, the directory usually looks something like 'C:\ClonedDirectory\TaskManagerApp\TaskManagerApp\bin\Debug' and there you will see <b>TaskManagerApp.exe</b>
 
 ## Screenshot of the app
 
