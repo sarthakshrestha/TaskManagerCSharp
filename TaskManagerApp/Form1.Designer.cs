@@ -55,7 +55,7 @@
             this.textBox1.Location = new System.Drawing.Point(19, 146);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(248, 114);
+            this.textBox1.Size = new System.Drawing.Size(263, 152);
             this.textBox1.TabIndex = 1;
             // 
             // label2
@@ -70,7 +70,7 @@
             // 
             // submitBtn
             // 
-            this.submitBtn.Location = new System.Drawing.Point(19, 276);
+            this.submitBtn.Location = new System.Drawing.Point(19, 304);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(75, 23);
             this.submitBtn.TabIndex = 3;
@@ -80,12 +80,13 @@
             // 
             // clearBtn
             // 
-            this.clearBtn.Location = new System.Drawing.Point(111, 276);
+            this.clearBtn.Location = new System.Drawing.Point(100, 304);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(75, 23);
             this.clearBtn.TabIndex = 4;
             this.clearBtn.Text = "Clear";
             this.clearBtn.UseVisualStyleBackColor = true;
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // label3
             // 
@@ -96,7 +97,6 @@
             this.label3.Size = new System.Drawing.Size(107, 22);
             this.label3.TabIndex = 5;
             this.label3.Text = "Task Priorty";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // highRadioButton
             // 
@@ -145,7 +145,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(777, 406);
+            this.ClientSize = new System.Drawing.Size(801, 486);
             this.Controls.Add(this.taskRemainingLabel);
             this.Controls.Add(this.lowRadioButton);
             this.Controls.Add(this.mediumRadioButton);

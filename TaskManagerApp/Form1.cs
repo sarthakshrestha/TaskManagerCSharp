@@ -10,9 +10,15 @@ using System.Windows.Forms;
 
 namespace TaskManagerApp
 {
+    /// <summary>
+    /// The class responsible to display the main window of the  Task Manager
+    /// </summary>
     public partial class MainWindow : Form
     {
 
+        /// <summary>
+        /// The main window of the application
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -37,13 +43,7 @@ namespace TaskManagerApp
         // Storing the tasks in a list
         private List<TaskItem> tasks = new List<TaskItem>();
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
+        // Function for when the user presses submit
         private void submitBtn_Click(object sender, EventArgs e)
         {
             // Retrieve text from text box
@@ -84,6 +84,9 @@ namespace TaskManagerApp
             }
         }
 
+        /// <summary>
+        /// Arranges the checkbox in respect to the priority of the task
+        /// </summary>
         private void ArrangeControlsInPanel()
         {
             int yLocation = 0;
@@ -108,7 +111,11 @@ namespace TaskManagerApp
             }
         }
 
-
+        /// <summary>
+        /// Function responsible to create the delete button next to the task
+        /// </summary>
+        /// <param name="taskRequired"></param>
+        /// <returns></returns>
         private Button CreateDeleteButton(string taskRequired)
         {
             // Create a new Button for deleting the task
@@ -125,7 +132,11 @@ namespace TaskManagerApp
             return deleteButton;
         }
 
-
+        /// <summary>
+        /// Event handler for the delete button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             // Handle the delete button click event
@@ -143,6 +154,10 @@ namespace TaskManagerApp
             }
         }
 
+        /// <summary>
+        /// Getter function for the priority of the task
+        /// </summary>
+        /// <returns></returns>
         private string GetSelectedPriority()
         {
             // Determine the selected priority from radio buttons
@@ -165,6 +180,12 @@ namespace TaskManagerApp
             }
         }
 
+        /// <summary>
+        /// Sorting the priority of the tasks in the panel created
+        /// </summary>
+        /// <summary>
+        /// Sorting the priority of the tasks in the panel created
+        /// </summary>
         private void ShowTaskPriority()
         {
             // Clear existing controls in the task panel
@@ -173,26 +194,45 @@ namespace TaskManagerApp
             // Sort tasks first by priority, then by the order in which they were added
             var sortedTasks = tasks.OrderBy(t => t.Priority).ThenBy(t => tasks.IndexOf(t)).ToList();
 
-            // Iterate through sorted tasks and display them
+            // Iterate through sorted tasks and display high and medium priority tasks
             int yLocation = 0;  // Start from the top of the panel
-            foreach (var taskItem in sortedTasks)
+            foreach (var taskItem in sortedTasks.Where(t => t.Priority != "Low"))
             {
-                CheckBox checkBox = CreateCheckBox(taskItem.Task);
-                Button deleteButton = CreateDeleteButton(taskItem.Task);
-
-                // Set the location for both the checkbox and delete button
+                CheckBox checkBox = CreateCheckBox($"{taskItem.Task} - {taskItem.Priority}");
                 checkBox.Location = new Point(0, yLocation);
+                taskPanel.Controls.Add(checkBox);
+
+                // Add the delete button below the text for high and medium priority tasks
+                Button deleteButton = CreateDeleteButton(taskItem.Task);
                 deleteButton.Location = new Point(checkBox.Width + 5, yLocation);
+                taskPanel.Controls.Add(deleteButton);
 
                 yLocation += checkBox.Height + 10; // Adjust the vertical spacing
+            }
 
-                // Add both checkbox and delete button to the task panel
+            // Add low-priority tasks at the bottom
+            var lowPriorityTasks = sortedTasks.Where(t => t.Priority == "Low").ToList();
+            foreach (var lowPriorityTask in lowPriorityTasks)
+            {
+                CheckBox checkBox = CreateCheckBox($"{lowPriorityTask.Task} - {lowPriorityTask.Priority}");
+                checkBox.Location = new Point(0, yLocation);
                 taskPanel.Controls.Add(checkBox);
+
+                // Add the delete button below the text for low-priority tasks
+                Button deleteButton = CreateDeleteButton(lowPriorityTask.Task);
+                deleteButton.Location = new Point(checkBox.Width + 5, yLocation);
                 taskPanel.Controls.Add(deleteButton);
+
+                yLocation += checkBox.Height + 10; // Adjust the vertical spacing
             }
         }
 
 
+        /// <summary>
+        /// Helper function that helps to create checkboxes for the tasks
+        /// </summary>
+        /// <param name="taskRequired"></param>
+        /// <returns></returns>
         private CheckBox CreateCheckBox(string taskRequired)
         {
             // Create a new CheckBox for the newly assigned task
@@ -209,6 +249,10 @@ namespace TaskManagerApp
             return checkBox;
         }
 
-       
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            // Clear the text in textBox1
+            textBox1.Clear();
+        }
     }
 }
